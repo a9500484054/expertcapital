@@ -4,6 +4,11 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+let valueOne = null;
+let valueTwo = null;
+let valueThree = null;
+
+
 document.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
@@ -194,9 +199,169 @@ document.addEventListener('DOMContentLoaded', () => {
     aos_init();
   });
 
+
+  const calculatorSelectOne = document.querySelector('.calculator__select-one')
+  calculatorSelectOne.addEventListener('change', (event) => {
+    console.log(event.target.value);
+    const type = document.querySelector(`#${event.target.value}`);
+    document.querySelectorAll('.form-select-type').forEach(el => el.classList.add('d-none'));
+    document.querySelectorAll('.subcategories').forEach(el => el.classList.add('d-none'));
+    type.classList.remove('d-none');
+  });
+  
+  document.addEventListener('change', (event)  => {
+    if(event.target.matches('.category')) {
+      const type = document.querySelector(`#${event.target.value}`);
+      document.querySelectorAll('.subcategories').forEach(el => el.classList.add('d-none'));
+      type.classList.remove('d-none');
+    }
+  });
+  
+  document.addEventListener('click', (event)  => {
+    if(event.target.matches('.subcategories1__btn-add')) {
+      document.querySelector('.subcategories1__wrapp').innerHTML += `
+              <div>
+                <div class="row mb-3">
+                  <div class="col-lg-5">
+                    <label for="" class="form-label">Метраж</label>
+                    <select class="form-select">
+                      <option  selected disabled>Выбрать</option>
+                      <option  value="subcategories1_1">до 150 кв.м</option>
+                      <option  value="subcategories1_2">от 151 до 500 кв. м.</option>
+                      <option  value="subcategories1_3">от 501 до 1000 кв. м.</option>
+                      <option  value="subcategories1_4">от 1001 до 5000 кв.м.</option>
+                      <option  value="subcategories1_5">от 5001 до 10000 кв.м.</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-5">
+                    <label for="" class="form-label">Тип помещения</label>
+                    <select class="form-select">
+                      <option  selected disabled>Выбрать</option>
+                      <option value="subcategories1_6">Помещение</option>
+                      <option value="subcategories1_7">Здание</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-2">
+                    <label for="" class="form-label">Кол-во</label>
+                    <input type="text" class="form-control" id="">
+                  </div> 
+                </div>
+                <div class="row">
+                  <div class="col-lg-5">
+                    <div for="" class="form-label">Сроки выполнения</div>
+                    <div>5-7 дней</div>
+                  </div> 
+                  <div class="col-lg-5">
+                    <div for="" class="form-label">Cтоимости работ</div>
+                    <div>9999 999 999 </div>
+                  </div> 
+                </div>
+              </div>`;
+    }
+  });
+
+
+
+
+  document.addEventListener('change', (event)  => {
+    if(event.target.matches('.subcategories1__select1')) {
+      valueOne = event.target.value;
+      resultService();
+
+    }
+  });
+  document.addEventListener('change', (event)  => {
+    if(event.target.matches('.subcategories1__select2')) {
+      valueTwo = event.target.value;
+      
+      resultService();
+    }
+  });
+  document.addEventListener('input', (event)  => {
+    if(event.target.matches('.subcategories1__select3')) {
+      valueThree = event.target.value;
+      
+      resultService();
+    }
+  });
+
+
+  let template = ` <div>
+                    <div class="row mb-3">
+                      <div class="col-lg-5">
+                        <label for="" class="form-label">Метраж</label>
+                        <select class="form-select">
+                          <option  selected disabled>Выбрать</option>
+                          <option  value="subcategories1_1">до 150 кв.м</option>
+                          <option  value="subcategories1_2">от 151 до 500 кв. м.</option>
+                          <option  value="subcategories1_3">от 501 до 1000 кв. м.</option>
+                          <option  value="subcategories1_4">от 1001 до 5000 кв.м.</option>
+                          <option  value="subcategories1_5">от 5001 до 10000 кв.м.</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-5">
+                        <label for="" class="form-label">Тип помещения</label>
+                        <select class="form-select">
+                          <option  selected disabled>Выбрать</option>
+                          <option value="subcategories1_6">Помещение</option>
+                          <option value="subcategories1_7">Здание</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-2">
+                        <label for="" class="form-label">Кол-во</label>
+                        <input type="text" class="form-control" id="">
+                      </div> 
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-5">
+                        <div for="" class="form-label">Сроки выполнения</div>
+                        <div>5-7 дней</div>
+                      </div> 
+                      <div class="col-lg-5">
+                        <div for="" class="form-label">Cтоимости работ</div>
+                        <div>9999 999 999 </div>
+                      </div> 
+                    </div>
+                  </div>`;
+
+
 });
 
+let resultService = () => { 
+  if(valueOne !== null && valueTwo !== null && valueThree !== null) {
+    let b;
+    let days;
+    switch(valueOne) {
+      case "subcategories1_1-1":
+        b = valueTwo ==='subcategories1_2-1' ? 35000 : 50000;
+        days = valueTwo ==='subcategories1_2-1' ? '3-5' : '4-7';
+        break;
+      case "subcategories1_1-2":
+        b = valueTwo ==='subcategories1_2-1' ? 45000 : 70000;
+        days = valueTwo ==='subcategories1_2-1' ? '3-5' : '4-7';
+        break;
+      case "subcategories1_1-3":
+        b = valueTwo ==='subcategories1_2-1' ? 60000 : 90000;
+        days = valueTwo ==='subcategories1_2-1' ? '3-5' : '4-7';
+        break;
+      case "subcategories1_1-4":
+        b = valueTwo ==='subcategories1_2-1' ? 80000 : 110000;
+        days = valueTwo ==='subcategories1_2-1' ? '3-5' : '4-7';
+        break;
+      case "subcategories1_1-5":
+        b = valueTwo ==='subcategories1_2-1' ? 110000 : 150000;
+        days = valueTwo ==='subcategories1_2-1' ? '3-5' : '4-7';
+        break;
+    };
 
+    document.querySelector(`.subcategories1__result`).classList.remove('d-none');
+    document.querySelector(`.subcategories1__result-days`).innerHTML ='';
+    document.querySelector(`.subcategories1__result-days`).innerHTML = days;
+    document.querySelector(`.subcategories1__result-cell`).innerHTML ='';
+    document.querySelector(`.subcategories1__result-cell`).innerHTML = valueThree * b;
+
+  }
+};
 
 let resizeReset = function() {
     w = canvasBody.width = window.innerWidth;
